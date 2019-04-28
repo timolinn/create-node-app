@@ -13,6 +13,7 @@ declare name=''
 
 if [[ -z $1 ]]
 then
+    # set app name to current directory name
     name="${PWD##*/}"
 fi
 
@@ -25,11 +26,9 @@ fi
 while getopts "hs:n:" opt; do
     case $opt in
         s)
-            echo "-s was passed as $OPTARG"
             src="${OPTARG}"
         ;;
         n)
-            echo "-n was passed as $OPTARG"
             name="${OPTARG}"
         ;;
         h)
