@@ -1,0 +1,91 @@
+#!/bin/bash
+
+usage="This script creates a new node express app from specified source
+
+Usage: create-node-app [name OPTIONAL] [-s source] [-n name]
+-s github link to source files (default: 'https://github.com/timolinn/node-starter.git')
+-n sets the name of the app (default: current directory)"
+
+OPTIND=1
+
+declare src='https://github.com/timolinn/node-starter.git'
+declare name=''
+
+if [[ -z $1 ]]
+then
+    name="${PWD##*/}"
+fi
+
+if [[ "$1" != -* ]]
+then
+    name=$1
+    shift
+fi
+
+while getopts "hs:n:" opt; do
+    case $opt in
+        s)
+            echo "-s was passed as $OPTARG"
+            src="${OPTARG}"
+        ;;
+        n)
+            echo "-n was passed as $OPTARG"
+            name="${OPTARG}"
+        ;;
+        h)
+            echo "$usage";
+            exit
+        ;;
+
+        \?)
+            echo "Unknown option: -${OPTARG}" >&2
+            exit 1
+        ;;
+    esac
+done
+
+shift $(( OPTIND -1 ))
+echo "Creating new node app from ${src}"
+echo "Note: You can change the source by using -s <git repo url>"
+
+if [[ -d $name ]]
+then
+    echo "folder with that name already exist! ❌"
+    exit 1;
+fi
+
+git clone "${src}" "${name}" > /dev/null 2>&1 &
+pid=$! # Process Id of the previous running command
+
+# Spinner
+spin='-\|/'
+
+i=0
+while kill -0 $pid 2>/dev/null
+do
+    i=$(( (i+1) %4 ))
+    printf "\rCreating... ${spin:$i:1}"
+    sleep .1
+done
+printf "\nDone.\n"
+
+# open with VScode if it is installed.
+if type code > /dev/null 2>&1; then
+    printf "code $name\n"
+    code $name
+fi
+
+# Install npm packages
+printf "cd $name && npm install"
+cd $name && npm i
+
+# Build code with babel
+printf "npm run build"
+npm run build
+
+# Start express server
+printf "Starting express server..."
+cp .env.sample .env
+npm run watch
+
+exit 0
