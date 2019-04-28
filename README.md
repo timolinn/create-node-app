@@ -13,23 +13,26 @@ This script was wriiten mostly for personal use, but feel free to make it your o
 
 Make the script executable on bash:
 ```bash
-    chmod u+x create-node-app.sh
+    chmod u+x create-node-app
 ```
 The script is ready to use!!! 😁.
 
 ## Usage
-Go ahead an run any of the commands below
+Go ahead and run any of the commands below
 ```bash
 
-    ./create-node-app.sh
+    ./create-node-app
 
     // OR
 
-    ./create-node-app.sh newapp
+    ./create-node-app newapp
 
     // OR
 
-    ./create-node-app.sh -s https://github.com/example/another-node-kit
+    ./create-node-app -s https://github.com/example/another-node-kit
+
+    // For the rest
+    ./create-node-app -h
 ```
 
 ## Make `create-node-app` command accessible from anywhere on your system
@@ -40,7 +43,7 @@ First create a `bin` in your home directory:
 
 Copy the script to the bin folder
 ```bash
-    cp ./create-node-app.sh ~/bin
+    cp ./create-node-app ~/bin
 ```
 
 Execute the following command:
@@ -52,10 +55,10 @@ Execute the following command:
 That's it! Now you can run `create-node-app` from anywhere.
 
 # Uninstall
-Simple run `rm ~/bin/create-node-app.sh`
+Simple run `rm ~/bin/create-node-app`
 
 ## Warning
-**Doesn't work well if source URL is incorrect** see TODO
+**Doesn't work well if source URL is incorrect**. see TODO
 
 ## TODO
 + Add error handling for invalid git url
