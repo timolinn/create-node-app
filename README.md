@@ -61,5 +61,5 @@ Simple run `rm ~/bin/create-node-app`
 **Doesn't work well if source URL is incorrect**. see TODO
 
 ## TODO
-+ Add error handling for invalid git url
-+ Add support for private repository
+- [ ] Add error handling for invalid git url
+- [ ] Add support for private repository
