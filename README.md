@@ -48,7 +48,7 @@ Copy the script to the bin folder
 
 Execute the following command:
 ```
-    // Add this to `.bsah_profile` to persist to persist it. Then open a new shell.
+    // Add this to `.bash_profile` to persist to persist it. Then open a new shell.
     export PATH=$PATH:$HOME/bin
 ```
 
