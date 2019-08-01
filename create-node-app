@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# exit script for non-zero return
+set -e
+
 usage="This script creates a new node express app from specified source
 
 Usage: create-node-app [name OPTIONAL] [-s source] [-n name]
